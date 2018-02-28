@@ -8,12 +8,6 @@ This module creates an Elasticsearch domain and applies an access policy which p
 * source IP address
 * client IAM role
 
-See [this Stack Overflow post](http://stackoverflow.com/questions/32978026/proper-access-policy-for-amazon-elastic-search-cluster) for further discussion of access policies for Elasticsearch.
-
-Several options affect the resilience and scalability of your Elasticsearch domain.  For a production deployment, set `instance_count` to an even number greater than or equal to 10 (the default is 6), choose an `instance_type` that is not in the T2 family, and set `es_zone_awareness` to `true`.  This will result in a cluster with three dedicated master nodes, balanced across two availability zones.
-
-For a production deployment it may also make sense to use EBS volumes rather that instance storage; to do so, set `ebs_volume_size` greater than 0 and optionally specify a value for `ebs_volume_type` (right now the only supported values are `gp2` and `magnetic`).
-
 ----------------------
 #### Required
 None (but `domain_name` and `management_public_ip_addresses` are strongly recommended).
@@ -56,19 +50,3 @@ Outputs
 - `domain_id` - Unique identifier for the domain.
 - `endpoint` - Domain-specific endpoint used to submit index, search, and data upload requests.  Kibana is available at `https://${endpoint}/_plugin/kibana/`.
 
-Authors
-=======
-
-[Steve Huff](https://github.com/hakamadare)
-
-Changelog
-=========
-
-0.0.2 - Bugfix (#1) which prevented module from executing correctly with variable defaults.
-
-0.0.1 - Initial release.
-
-License
-=======
-
-This software is released under the MIT License (see `LICENSE.md`).
